@@ -1,0 +1,43 @@
+interview question : 
+
+Populate
+Middleware
+Aggregiation
+Joining of multiple database
+Express.js
+JSON
+What is node.js
+req.query
+Difference between GET & POST body
+
+To know : Flat Schema
+
+interview question : 
+
+Gulp.js
+chai
+API gateway
+Creating HTTP server
+Difference between SASS & CSS
+SVN Version control
+Bind in node.js
+​Promise & Callback
+MongoDB database replication
+Docker
+
+interview question: 
+code quetion
+var obj = {x: 42}
+get x;
+function() {
+return this.x;
+}
+var printx = obj.getx;
+console.log(printx);
+
+interview question: 
+
+Mongo curser
+batching in MongoDB
+limit in fetching data at a time from MongoDB
+

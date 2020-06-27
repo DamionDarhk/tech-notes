@@ -1,0 +1,19 @@
+honup: used before executing any command, so when terminal(shell/command prompt) closes, it won't kill anything this command created.
+
+Continuous Integration: Process that we use to make changes that we make in code base, and merse them back into single branch
+
+continuous integration server: VM that runs in cloud, that will clone your project, and run test on it, to make sure that code that we are adding doesn't break our project.
+
+yml file: simplified way of writing plain JSON data
+
+travis CI configuration(.travis.yml) :
+dist: short for distribution, used as base image for VM that is going to be created for us (it contain name of VM OS that we are going to use in it)
+
+some number of services(database, data modules, pieces of software that we need to run our software successfully) that we want to be created for project
+
+env: array of environment variable
+
+cache: cache the directories stored inside this value, and whenever when travis re-clone the project, it will not commit/execute the code inside of directories listed inside 'cache' value, and will took the code from travis itself.
+
+install: contain list of command that need to be executed in command line(command to be executed to get project ready in VM)
+

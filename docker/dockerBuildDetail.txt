@@ -1,0 +1,67 @@
+Flow of "docker build ." command: 
+
+Sending build context to Docker daemon  363.9MB
+Step 1/4 : FROM alpine
+ ---> 3f53bb00af94
+Step 2/4 : RUN apk add --update redis
+ ---> Running in 07329e809dd2	//here docker is creating new container from above image 3f53bb00af94, w/ it's run command as "apk add --update redis"
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing redis (4.0.11-r0)
+Executing redis-4.0.11-r0.pre-install
+Executing redis-4.0.11-r0.post-install
+Executing busybox-1.28.4-r2.trigger
+OK: 6 MiB in 14 packages
+Removing intermediate container 07329e809dd2	//after container 07329e809dd2 is created, we took file system snapshot and stopped it entirely
+ ---> f057ad4f5ff4	//after above step, we save temporary image w/ id f057ad4f5ff4
+Step 3/4 : RUN apk add --update gcc
+ ---> Running in 3ba69075fadd
+(1/11) Installing binutils (2.30-r5)
+(2/11) Installing gmp (6.1.2-r1)
+(3/11) Installing isl (0.18-r0)
+(4/11) Installing libgomp (6.4.0-r9)
+(5/11) Installing libatomic (6.4.0-r9)
+(6/11) Installing pkgconf (1.5.3-r0)
+(7/11) Installing libgcc (6.4.0-r9)
+(8/11) Installing mpfr3 (3.1.5-r1)
+(9/11) Installing mpc1 (1.0.3-r1)
+(10/11) Installing libstdc++ (6.4.0-r9)
+(11/11) Installing gcc (6.4.0-r9)
+Executing busybox-1.28.4-r2.trigger
+OK: 90 MiB in 25 packages
+Removing intermediate container 3ba69075fadd
+ ---> 00bd7f9a71af
+Step 4/4 : CMD ["redis-server"]
+ ---> Running in 34e07ab3de65	//again docker is creating temporary container, and stating that whenever it get started, it's primary command will be "redis-server"
+Removing intermediate container 34e07ab3de65	//save image w/ id 9104e3966360
+ ---> 9104e3966360
+Successfully built 9104e3966360
+
+
+----Dockerfile-----
+
+# Use an existing docker image as an base
+FROM alpine
+
+# Download and install dependency
+RUN apk add --update redis
+RUN apk add --update gcc
+
+# Tell the image what to do when it start as container
+CMD ["redis-server"]
+
+-------------------
+Dockerfile for installing deploying docker container of node application
+-------------------
+# Specify base image
+FROM node:alpine
+
+# Specifying workdir to put applidation files into
+WORKDIR /usr/nodeapp
+
+# Install some dependecies
+COPY ./ ./
+RUN npm install
+
+# Default command
+CMD ["npm", "start"]

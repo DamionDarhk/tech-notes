@@ -1,0 +1,23 @@
+docker image: single file w/ all the dependicies & config required to run a program
+
+docker container: instance of an image used to run an program
+
+Dockerfile: configuration to define how our docker container should behave (when creating custom docker image)
+
+port mapping(defined only at the runtime) when request is make on local network, take that request and forward into the docker container port (format: sudo docker run -p <incoming request coming to this port in local network>:<port number to be forward inside the docker container> <image name/id>) (ex: sudo docker run -p 8080:8080 arghajeet/testnodeapp)
+
+sudo docker run busybox ls : here this command(ls) will print all directories that are there inside file system of container busybox. ls (some other command like echo) are part of busybox image, other container (like hello-world) may not have these command (ls, echo etc)
+
+docker run <container name>: is divided into 2 sub command, that it execute in background
+creating an docker container(sudo docker create hello-world): setting up file system where it's file will be run
+starting an docker container(sudo docker start -a <output from above command output> : -a parameter is used to give output of docker start into terminal): actually running the starter command (ex: docker run hello-world)
+
+getting logs from ended container(sudo docker logs <container id>)
+
+docker exec -it <container id> <command to be executed inside container from container id provided>(ex: sudo docker exec -it 7182fca0ef13 redis-cli): here -it is two different flags -i and -t. -i states to print output from additional command provided, and -t states to print output in formatted manner. It's used to run additional process inside an container, when the same container has already started
+
+docker run -it <container name> <command to be executed inside container from container name provided> (ex: docker run -it busybox sh): the disadvante of this method is that we can't run any other process with provided container name. In order to avoid that we can run some web server etc, and then run different command from docker exec command.
+
+sudo docker commit -c 'CMD ["<custom command to run new image>"]' <container id of existing image>: create new image from an running existing container.  (ex: sudo docker commit -c 'CMD ["redis-server"]' e0173b1d62dc). After executing the command, you will get an output as image id(ex: sha256:692c9f62287caf4e224b6af6615a8eb926b1eefbed666d9af368962c98105610). Then you can run the newly created docker image as (docker run <image id created>, ex: docker run 692c9f62287caf4e224b6af6615a8eb926b1eefbed666d9af368962c98105610)
+
+tagging an image: creating an custom image & instead of running by it's container id, we can give custom image name to it. syntax: (sudo docker build  -t <docker id>/<custom image name>:latest .) (ex: sudo docker build  -t arghajeet/custom-redis:latest .)

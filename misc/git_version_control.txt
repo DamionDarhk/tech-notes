@@ -1,0 +1,29 @@
+gists
+comparing branching merging in git
+
+git: decentralized or distributed version control system
+
+repository: collection of version controlled files & their is repository
+
+p4merge: visual comparision & merge resolution tool
+
+.gitignore : file within git repository where we can enter name of files (or extension of files example: *.log) that need to be ignored by git
+
+local git:
+working directory: contain all files & folder of our application which may/maynot by git, but it's aware of these files
+
+staging area: used to prepare for next commit(when we enter cmd git add) and then moved finally to git repository(by enter cmd "git commit")
+
+repository(.git folder)(commit history): contain all commit/saved changes to Git repository
+
+command explain:
+git add .: moves files declared in "git add" from working directory(unconcerned w/ git) into staging area
+git command -m "info for commit files" : moves files from staging area to git repository
+git log / git show : show detailed history of commit in git repository
+git ls-files: display list of files that git tracks
+git reset HEAD readme.md : move files from statging area mentioned in cmd
+git checkout -- readme.md : revert back the changes made to file readme.mds
+git config --global alias.xhistory "log --oneline --graph --decorate --all" : create custom-build command (alias) for git as xhistory. We will run it as "git xhistory"
+git mv example.txt xexample.txt : rename example.txt (that's in git repository) to xexample.txt (it will set in staging area, then we have to commit the file)
+git rm xexample.txt : remove xexample.txt from git repository (it will set in staging area, then we have to commit the delete)
+git add -A : update all possible changes made in working directory into staging area

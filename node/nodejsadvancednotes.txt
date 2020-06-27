@@ -1,0 +1,88 @@
+parameter to test rest api: postman(& chromium)
+test node.js performance: apache benchmark
+
+Node.js(50% JavaScript code & 50% C++ code): JavaScript project
+It has internal collection of dependicies that actually executed code.
+2 important dependicies of Node.js: V8 & libuv
+
+process.binding() : convert JavaScript function to C++ function
+
+v8(30% JavaScript code & 70% C++ code): open source javascript engine. Used to execute code outside of browser. Convert value between JavaScript
+ & C++ world
+
+libuv(100% C++ code): C++ open source project, used to give node.js access to OS file system, network, and also handle some aspects of concurrency
+
+Why we use Node.js: Provide interface to write code in JavaScript, so that we don't have to write code in C++(libuv dependicies), and it also has
+different library module(http, fs)
+
+readStream:-  Standard object in node library, that events an close eventex
+
+Event Loop: Controlled Structure that decides what's the thread is supposed to do at any given time.
+
+Multi-Threadding(automatically created by libuv whenever we start node program): delegate various javascript function to C++ side(libuv) of Node.js(where it process tasks in Thread Pool:by default there are 4 thread inside an thread pool). Thus for some other Standard JavaScript library, C++ side of Node & libuv decides to process the tasks outside of Event Loop entirely
+
+libuv doesn't perform low level operating tasks (like network/HTTP request(as seen in async.js code) etc), so it delegate it to OS async features
+
+2 ways to Enhabcing Node.js preformance:
+
+Use Node.js in 'cluster' mode: run multiple copies of node that are already in server, so we can have multiple instance of event loop
+Explanation: It use cluster manager that is used to monitor health of different node instance(and also start/stop/restart/other admintrative tasks)
+During cluster mode, when we first execute *.js program, an instance os node is launched which is called cluster manager(is has an property isMaster whose flag always set to true), and then cluster manager launches child thread(process incoming request). As soon as we start child thread(through cluster.fork(), isMaster flag will be set to false & will execute node program 2nd or 3rd or 4th time)
+
+Note: 
+*In order for cluster manager to launch child thread, it require cluster module library from node library(cluster.fork() : when this LOC execute, our node program will execute 2nd time in a different way)
+*Every child thread will have it's own thread pool.
+
+Important: Number of child thread in node program should be equal to number of physical/logical cores in CPU(in case of heavy processing, it's preferred to set number of child thread to number of CPU)
+
+Use worker thread: it use thread pool(that created by libuv) 
+
+(nodemon doesn't work properly w/ node cluster)
+
+PM2 CLI : Open-Source Node Cluster management system. responsible for spawning multiple instance of node program, restart as well in case if node program crashes
+
+Different Middleware in AdvancedNode:
+CookieSession : Authentication & maintaince of session of incoming requests
+Passport : handle authentication inside application(in this application, it's setup already by Google OAuth)
+BodyParser : Parsing the body POST request
+
+mlab.com : used to create MongoDB instance
+
+Caching : improve read performance of express.js application
+
+Index in MongoDB Collection: data structure used to look for set's of records in an collection
+
+Collection Scan : looking for every single records inside an collection
+
+Note: 
+* more the number of index in collection, more time it will take to write data in collection, and will consume more memory/disks space
+
+Cache Server(Redis): Maintain records of query that was executed, and whenever an requests of an query come, whose result is already saved in cache server, then it will send the output from cache server itself without connecting to MongoDB
+
+redis (refer to library for using Redis w/ MongoDB & mongoose): inside redis, there are 2 column: key & value
+set('dark','darkless') : Used to manipulate data inside redis(here 'dark' is the key, and 'darkless' is the updated value)
+client.get('dark', (err, routput) => console.log(routput)) : displaying output of value of 'dark' key (it uses callback)
+
+Note: Redis only stores letters & number, it won't store JavaScript object
+save JavaScript object : client.set('testobject', JSON.stringify({dark: 'rises'}));
+display JavaScript object : client.get('testobject', (err, val) => console.log(JSON.parse(val)));
+
+Expiring data out of redis:	client.set('color', 'red', 'EX', 5)
+in above LOC, 
+'color' is key
+'red' is value
+'EX' means expires
+5 means it number of seconds after which it's gonna be deleted from redis
+
+Note: Callback are dying feature & we want to avoid them as much as possible
+
+Promisify : accepts node function that accepts callback as last arguement, and it makes it instead return an promise.
+
+query.getOptions()
+
+Object.assign() : safely copy properties from one object to another
+
+model: reference to model class that is tied to query that we are executing 
+
+this.model: reference to the model that represents the query that is being executed
+

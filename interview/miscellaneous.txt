@@ -1,0 +1,44 @@
+function i.e query refer to as constructor function. When we use new in that function, it create an instance of the object that is produced by that function
+
+service folder : code where it touches many part of project/app
+
+virtual web browser : chromium
+
+'this' keyword in js: reference to object that is executing current function
+
+npm module jest: it's an test runner, run test from cmd, and make assertion about the behaviour of application. Whenever jest is executed, it start new node environment, and only executes JavaScript program w/ extension *.test.js and other part of javascript program will not be executed (unless spefically ask to run inside of *.test.js)
+
+npm module puppeteer: launch chromium instance & interact w/ javascript that we write
+
+CSS selector | anchor tag
+
+beforeEach(): executes any logic/function before executing any tests
+
+cookie-session library: work-flow 
+* pull 'session' & 'session.sig' property from the cookie
+* use 'session.sig' (session signature)to ensure that 'session' property was not compromised
+* decode 'session' into JavaScript object
+* put that object into 'req.session'
+
+cookie-session(keygrip): working
+
+passport library: work-flow
+* use 'req.session.passport.user' to verify if user exists in MongoDB
+* If so, pass it to 'deserializedUser' (module inside passport.js library)
+* assign output from MongoDB(in step 1) to req.user
+
+Factory Function(type of function): whenever we call it, it assemble some data & return it
+
+factoru: used to generate some test data
+
+Proxy in JavaScript: Feature of JavaScript, that was introduced in ES6. It allow to manage access to some target object or multiple target object. It takes 2 seperate arguement
+
+1st arguement: target (object that we want to manage access to it)
+
+2nd arguement: handler (it's an object that contains set of function, and these function are executed anytime when we try to access the target). It has single key assigned to it, called 'get', and 'get' gonna have an value, i.e function. This function takes 2 seperate arguement, 1st is target, 2nd arguement is 'property' 
+
+get: take whatever property we are trying to access on proxy itself, and it call function that is assigned to 'get' key
+
+static function: it can be used to call, without calling instance of class itself.
+
+will generate new puppeteer page, then new instance of CustomPage, and then it's gonna combine 2 together w/ proxy object
