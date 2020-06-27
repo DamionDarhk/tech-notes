@@ -1,0 +1,28 @@
+microservice: a microservice contain all the code required to make one feature correctly.
+
+challenges in microservice:
+* data management between services
+
+Data management:
+* Each services get it's own database (if required)
+* services will never ever access another services database
+
+why database per services:
+* we want services to run independently of other services
+* database schema/structure change uxpectly
+* some services work more efficiently w/ different types of database (NoSQL, SQL etc)
+
+Communication stratergies between different services:
+* sync: services communicates w/ each other using direct requests
+* async: services communicates w/ each other using events
+
+Event Bus: handle notification & events emmited from different services
+
+ways of using async communicates:
+1. services will be communicating w/ each other in an common space i.e Event Bus/Broker
+2. any time an action has happened in an services (ex: userCreated), it will throw an event (along w/ some information) in Event Bus, and from there whichever services want that information it can save it in their own database 
+
+Notes on 2nd method of async communicate:
+Cons:
+* Data duplication, paying for extra storage & database.
+* harder to understand
