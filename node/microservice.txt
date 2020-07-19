@@ -1,5 +1,8 @@
 microservice: a microservice contain all the code required to make one feature correctly.
 
+why microservice:
+* to increase the realibility of overall system
+
 challenges in microservice:
 * data management between services
 
@@ -26,3 +29,6 @@ Notes on 2nd method of async communicate:
 Cons:
 * Data duplication, paying for extra storage & database.
 * harder to understand
+
+Misc Notes:
+* when designing a services, it is important to make sure what you want your services to do.
