@@ -32,3 +32,9 @@ Cons:
 
 Misc Notes:
 * when designing a services, it is important to make sure what you want your services to do.
+
+Async Communication Corner cases:
+
+1. When event are missed by an individual microservice:
+Solution: Store each events(most probably in MongoDB) received by any microservice, 
+so that in time-period in which microservice missed an events(due to failure etc) it can process those lost events
