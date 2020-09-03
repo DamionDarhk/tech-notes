@@ -1,0 +1,14 @@
+kubectl version : command used to get version of Kubernetes
+
+pod: it wraps up an container and deploy it inside the node of Kubernetes
+
+deployment: responsible for reading Kubernetes config files & deploy pod, it's responsible
+for high availability of pod.
+
+service: gives access to running pod or running container inside of node cluster
+
+commands:-
+kubectl apply -f posts.yaml : create Kubernetes cluster based on yaml configuration
+kubectl get pods : get status of pods running
+
+ingress controller: distributes traffic to different pods based on traffic rules specified

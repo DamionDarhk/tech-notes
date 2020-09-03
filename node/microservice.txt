@@ -38,3 +38,7 @@ Async Communication Corner cases:
 1. When event are missed by an individual microservice:
 Solution: Store each events(most probably in MongoDB) received by any microservice, 
 so that in time-period in which microservice missed an events(due to failure etc) it can process those lost events
+
+
+Creation of different services in microservice should be based on an individual feature
+ of an application 

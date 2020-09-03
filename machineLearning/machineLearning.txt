@@ -1,0 +1,5 @@
+types of output in model:
+* classification: the value of labels belongs to discrete sets (output scope is discrete)
+
+* regression: the value of labels belongs to continous sets (output belongs to an range)
+(Linear regression algorithm)
