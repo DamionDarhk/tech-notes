@@ -42,3 +42,28 @@ so that in time-period in which microservice missed an events(due to failure etc
 
 Creation of different services in microservice should be based on an individual feature
  of an application 
+
+Ways in which each microservice will authenticate the request :-
+1. Each microservice will connect directly(sync request) to 
+  central authentication microservice to verify whether token inside request
+  is valid or not.
+2. There will be authenticate gateway, where each request before sending
+  to an microservice, will be authenticated.
+3. Each microservice will have it's own authentication information to verify
+  whether an request is valid or not.
+
+In case if we decide to use option#3, then there is an problem of reflecting
+authentication state(blocking/unblocking an user) of an user throught the different 
+services. Below is the possible solution for the same:
+
+1. After an successfull authentication, token life should be less(ex: 15 min.) in that
+case if token is expired after an set interval of time then the requested service can
+connect with authentication service which will notify the requested service about change
+in authentication state. The drawback of this approach is that after an change in
+authentication state, there will be gap of set interval of time where the token will
+be active.
+
+2. After any change in authentication state of an user, even the event that state's 
+the change in authentication state, and modify each services to accept the change in
+authentication state and save the updated authentication state information for a set
+interval of time(probably in form of cache) as eventually an token will be expired.
