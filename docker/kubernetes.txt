@@ -12,3 +12,11 @@ kubectl apply -f posts.yaml : create Kubernetes cluster based on yaml configurat
 kubectl get pods : get status of pods running
 
 ingress controller: distributes traffic to different pods based on traffic rules specified
+
+ways of connecting other service within an Kubernetes environment(using HTTP : used in Server Side Rendering)
+1. Directly call the service name that you want to connect to
+2. Call the ingress-nginx (format of cross namespace service communication: SERVICENAME.NAMESPACE_OF_SERVICE.svc.cluster.local)
+   from there it will have routing rules that will re-direct to the said service
+Commands for step#2:
+kubectl get namespace
+kubectl get service -n ingress-nginx
